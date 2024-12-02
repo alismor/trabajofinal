@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo general */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff5733;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #e0e0e0;
+        }
+
+        tr:hover td {
+            background-color: #f7d1d1;
+            cursor: pointer;
+        }
+
+        /* Estilo de pie de página */
+        footer {
+            background-color: #ff5733;
+            color: white;
+            padding: 10px 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container py-5">
+        <h2>Registros de Contacto</h2>
+        <table class="table table-bordered" id="tabla-contactos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Mensaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los registros aparecerán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>© 2024 Nombre de la Empresa. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const registros = JSON.parse(localStorage.getItem("contactos")) || [];
+        const tablaContactos = document.getElementById("tabla-contactos").getElementsByTagName('tbody')[0];
+
+        if (registros.length > 0) {
+            registros.forEach(contacto => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${contacto.nombre}</td>
+                    <td>${contacto.correo}</td>
+                    <td>${contacto.telefono}</td>
+                    <td>${contacto.mensaje}</td>
+                `;
+                tablaContactos.appendChild(tr);
+            });
+        } else {
+            tablaContactos.innerHTML = "<tr><td colspan='4' class='text-center'>No hay registros aún.</td></tr>";
+        }
+    </script>
+
+</body>
+</html>
